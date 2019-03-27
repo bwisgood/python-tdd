@@ -5,4 +5,4 @@ class SmokeTest(TestCase):
     def test_bad_math(self):
         self.assertEqual(1, 2)
 
-# master change
+# hotfix change
