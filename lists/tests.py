@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import resolve
 from django.http import HttpRequest
+from django.template.loader import render_to_string
 
 from lists.views import home_page
 
@@ -13,9 +14,13 @@ class SmokeTest(TestCase):
 
 class HomePageTest(TestCase):
     def test_home_page_returns_correct_html(self):
-        request = HttpRequest()
-        response = home_page(request)
-        html = response.content.decode('utf-8')
-        self.assertTrue(html.startswith('<html>'))
-        self.assertIn('<title>To-do</title>', html)
-        self.assertTrue(html.endswith("</html>"))
+        # request = HttpRequest()
+        # response = home_page(request)
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'home.html')
+        # html = response.content.decode('utf-8')
+        # self.assertTrue(html.startswith('<html>'))
+        # self.assertIn('<title>To-do lists</title>', html)
+        # self.assertTrue(html.endswith("</html>"))
+        # expect_html = render_to_string('home.html')
+        # self.assertEqual(html, expect_html)
